@@ -16,10 +16,10 @@ function validatePassword(password) {
 
 function PasswordStrengthBar({ password }) {
   const checks = {
-    length:    password.length >= 8,
+    length: password.length >= 8,
     uppercase: /[A-Z]/.test(password),
-    number:    /[0-9]/.test(password),
-    special:   /[!@#$%^&*(),.?\":{}|<>]/.test(password),
+    number: /[0-9]/.test(password),
+    special: /[!@#$%^&*(),.?\":{}|<>]/.test(password),
   };
   const passed = Object.values(checks).filter(Boolean).length;
   const colors = ["#ef4444", "#f97316", "#eab308", "#22c55e"];
@@ -28,24 +28,24 @@ function PasswordStrengthBar({ password }) {
   return (
     <div className="password-hint">
       <div style={{ display: "flex", gap: "4px", marginBottom: "6px" }}>
-        {[0,1,2,3].map(i => (
+        {[0, 1, 2, 3].map(i => (
           <div key={i} style={{
             flex: 1, height: "4px", borderRadius: "2px",
-            background: i < passed ? colors[passed-1] : "#e5e7eb",
+            background: i < passed ? colors[passed - 1] : "#e5e7eb",
             transition: "background 0.3s"
           }} />
         ))}
       </div>
       {password.length > 0 && (
-        <div style={{ fontSize: "11px", color: colors[passed-1] || "#9ca3af", marginBottom: "4px" }}>
-          {passed > 0 ? labels[passed-1] : "Too weak"}
+        <div style={{ fontSize: "11px", color: colors[passed - 1] || "#9ca3af", marginBottom: "4px" }}>
+          {passed > 0 ? labels[passed - 1] : "Too weak"}
         </div>
       )}
       <ul>
-        <li className={checks.length    ? "valid" : ""}>{checks.length    ? "✓" : "○"} At least 8 characters</li>
+        <li className={checks.length ? "valid" : ""}>{checks.length ? "✓" : "○"} At least 8 characters</li>
         <li className={checks.uppercase ? "valid" : ""}>{checks.uppercase ? "✓" : "○"} One uppercase letter</li>
-        <li className={checks.number    ? "valid" : ""}>{checks.number    ? "✓" : "○"} One number</li>
-        <li className={checks.special   ? "valid" : ""}>{checks.special   ? "✓" : "○"} One special character (!@#$...)</li>
+        <li className={checks.number ? "valid" : ""}>{checks.number ? "✓" : "○"} One number</li>
+        <li className={checks.special ? "valid" : ""}>{checks.special ? "✓" : "○"} One special character (!@#$...)</li>
       </ul>
     </div>
   );
@@ -53,17 +53,17 @@ function PasswordStrengthBar({ password }) {
 
 function Register() {
   const navigate = useNavigate();
-  const [fullName, setFullName]               = useState("");
-  const [email, setEmail]                     = useState("");
-  const [password, setPassword]               = useState("");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [showPassword, setShowPassword]       = useState(false);
-  const [showConfirm, setShowConfirm]         = useState(false);
-  const [code, setCode]                       = useState("");
-  const [step, setStep]                       = useState(1);
-  const [message, setMessage]                 = useState("");
-  const [isError, setIsError]                 = useState(false);
-  const [loading, setLoading]                 = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [code, setCode] = useState("");
+  const [step, setStep] = useState(1);
+  const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -89,9 +89,14 @@ function Register() {
       let data;
       try { data = await response.json(); } catch { throw new Error("Invalid server response."); }
       if (!response.ok) throw new Error(data.detail || "Registration failed.");
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("coursify_role", data.user?.role);
+
       setIsError(false);
-      setMessage(data.message || "Verification code sent to your email.");
-      setStep(2);
+      setMessage("Registration successful! Redirecting...");
+
+      setTimeout(() => navigate("/dashboard"), 1500);
     } catch (error) {
       setIsError(true); setMessage(error.message);
     } finally { setLoading(false); }
@@ -145,38 +150,38 @@ function Register() {
               <form onSubmit={handleRegister} noValidate>
                 <div className="input-box">
                   <span className="input-icon-left">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                   </span>
                   <input type="text" value={fullName} onChange={e => setFullName(e.target.value)} placeholder="Full Name" className="box-input" disabled={loading} />
                 </div>
                 <div className="input-box">
                   <span className="input-icon-left">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M2 7l10 7 10-7" /></svg>
                   </span>
                   <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email Address" className="box-input" disabled={loading} />
                 </div>
                 <div className="input-box">
                   <span className="input-icon-left">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
                   </span>
                   <input type={showPassword ? "text" : "password"} value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" className="box-input" disabled={loading} />
                   <button type="button" className="input-icon-right" onClick={() => setShowPassword(!showPassword)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
                   </button>
                 </div>
                 {password.length > 0 && <PasswordStrengthBar password={password} />}
                 <div className="input-box">
                   <span className="input-icon-left">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
                   </span>
                   <input type={showConfirm ? "text" : "password"} value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholder="Confirm Password" className="box-input" disabled={loading} />
                   <button type="button" className="input-icon-right" onClick={() => setShowConfirm(!showConfirm)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
                   </button>
                 </div>
                 {message && <p className={`message ${!isError ? "success-message" : ""}`} role="alert">{message}</p>}
                 <button type="submit" className="primary-btn" style={{ marginTop: "16px" }} disabled={loading}>
-                  {loading ? "Sending code..." : "REGISTER"}
+                  {loading ? "Creating account..." : "REGISTER"}
                 </button>
               </form>
             </>
@@ -187,7 +192,7 @@ function Register() {
               <form onSubmit={handleVerify} noValidate>
                 <div className="input-box">
                   <span className="input-icon-left">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M2 7l10 7 10-7" /></svg>
                   </span>
                   <input type="text" value={code} onChange={e => setCode(e.target.value)} placeholder="Enter 6-digit code" className="box-input" maxLength={6} disabled={loading} />
                 </div>

@@ -202,7 +202,14 @@
 
 .empty-state .empty-icon { font-size: 52px; margin-bottom: 16px; }
 .empty-state h3 { font-size: 20px; font-weight: 700; color: #1e293b; margin: 0 0 10px; }
-.empty-state p  { font-size: 14px; color: #94a3b8; margin: 0 0 28px; line-height: 1.7; max-width: 400px; margin-inline: auto; margin-bottom: 28px; }
+.empty-state p  { 
+  font-size: 14px; 
+  color: #94a3b8; 
+  line-height: 1.7;
+  max-width: 400px;
+  margin: 0 auto 28px;
+  text-align: center;
+}
 
 .primary-btn-assess {
   padding: 13px 32px;

@@ -1,0 +1,126 @@
+
+.register-form-container {
+  max-height: 90vh;
+  overflow-y: auto;
+  padding-right: 10px;
+  text-align: center;
+}
+
+.register-form-container::-webkit-scrollbar {
+  width: 5px;
+}
+
+.register-form-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.register-form-container::-webkit-scrollbar-thumb {
+  background: #2bbbad;
+  border-radius: 10px;
+}
+
+.register-form-container::-webkit-scrollbar-thumb:hover {
+  background: #20AFAB;
+}
+
+.register-form {
+  margin-top: 10px;
+}
+
+.register-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.terms-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.terms-row input[type="checkbox"] {
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.terms-row label {
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.terms-link {
+  color: #2bbbad;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.3s;
+}
+
+.terms-link:hover {
+  text-decoration-color: #2bbbad;
+}
+
+.success-message {
+  color: #10b981 !important;
+  background-color: #d1fae5;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.password-hint {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #f3f4f6;
+  border-radius: 6px;
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.password-hint p {
+  margin: 0 0 5px 0;
+  font-weight: 600;
+}
+
+.password-hint ul {
+  margin: 0;
+  padding-left: 15px;
+  list-style-type: none;
+}
+
+.password-hint li {
+  margin: 3px 0;
+  color: #9ca3af;
+  transition: color 0.3s;
+}
+
+.password-hint li.valid {
+  color: #10b981;
+}
+
+
+@media (max-width: 768px) {
+  .register-form-container {
+    max-height: 80vh;
+  }
+  
+  .register-options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .terms-row {
+    font-size: 11px;
+  }
+}

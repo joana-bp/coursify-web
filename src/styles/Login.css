@@ -1,0 +1,224 @@
+/* Layout */
+.split-page {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* 60% LEFT */
+.split-left {
+  position: relative;
+  flex: 6;
+  background: linear-gradient(135deg, #4da3f5, #2bbbad);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 60px;
+}
+
+.logo-container {
+  position: absolute;
+  top: 40px;
+  left: 30px;
+}
+
+.logo-text {
+  width: 200px;
+  margin-bottom: 30px;
+  height: auto;
+}
+
+.brand-content h1 {
+  font-size: 39px;
+  margin-bottom: 10px;
+}
+
+.brand-content p {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* 40% RIGHT */
+.split-right {
+  flex: 4;
+  background: #f9fafb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.form-logo {
+  height: 60px;
+  width: auto;
+}
+
+.form-container {
+  width: 300px;
+}
+
+.form-container h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #1f2937;
+  text-align: center;
+}
+
+.form-container p {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+/* ===== Input Box Style ===== */
+.input-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #f3f4f6;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 0 14px;
+  margin-bottom: 16px;
+  transition: border-color 0.2s;
+}
+
+.input-box:focus-within {
+  border-color: #4da3f5;
+  background: #fff;
+}
+
+.input-icon-left {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.input-icon-right {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.box-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  color: #1f2937;
+  padding: 12px 0;
+}
+
+.box-input::placeholder {
+  color: #9ca3af;
+}
+
+/* ===== Remember Row ===== */
+.remember-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.forgot-link {
+  color: #2bbbad;
+  cursor: pointer;
+}
+
+/* ===== Button ===== */
+.primary-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #FBB217, #e0a045);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.primary-btn:hover {
+  background: #2bbbad;
+  opacity: 0.9;
+}
+
+.message {
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #e53e3e;
+}
+
+.signup-link {
+  margin-top: 20px;
+  font-size: 13px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .split-page {
+    flex-direction: column;
+  }
+
+  .split-left {
+    flex: none;
+    height: 220px;
+    padding: 30px;
+  }
+
+  .logo-container {
+    top: 20px;
+    left: 20px;
+  }
+
+  .logo-text {
+    width: 130px;
+  }
+
+  .brand-content h1 {
+    font-size: 22px;
+  }
+
+  .brand-content p {
+    font-size: 14px;
+  }
+
+  .split-right {
+    flex: 1;
+    padding: 30px 20px;
+    align-items: flex-start;
+  }
+
+  .form-container {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .primary-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+}
